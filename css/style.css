@@ -1,0 +1,219 @@
+/*
+    [glo]bal
+    [hea]der
+    [mai]n
+*/
+
+
+/* [glo]bal */
+
+@keyframes heartbeat {
+    0% {
+        opacity: 1;
+        color: white;
+    }
+    4% {
+        color: lightblue;
+    }
+    17% {
+        color: pink;
+    }
+    35% {
+        opacity: .3;
+    }
+    54% {
+        color: red;
+    }
+    100% {
+        opacity: .7;
+        color: lightgreen;
+    }
+}
+
+body {
+    font-family: 'Open sans', sans-serif;
+    background-color: #2f3848;
+    width: 900px;
+    margin: 0 auto;
+}
+
+a {
+    color: yellowgreen;
+}
+
+p {
+    color: white;
+}
+
+/* [hea]der */
+
+h1 {
+    color: white;
+    font-style: italic;
+    text-align: center;
+    background-color: #f05768;
+    border-bottom: 2px solid white;
+    border-radius: 0px 0px 5px 5px;
+    padding-bottom: 15px;
+    font-size: 2.5em;
+    font-weight: bold;
+    margin-bottom: 15px;
+    margin-top: 0;
+}
+
+h1 > span {
+    animation-name: heartbeat;
+    animation-duration: .5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    /*animation-timing-function: linear;*/
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+.menu, .social {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+}
+
+.menu li, .social li {
+    margin: 0 .5em;
+}
+
+.menu a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.social img {
+    height: 1.5em;
+}
+
+/* [mai]n */
+
+.presentation h2 {
+    color: #00ccff;
+    font-style: oblique;
+}
+
+.highlight {
+    position: relative;
+}
+
+.highlight h2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #f05768;
+    color: white;
+    margin: 0;
+    padding: .5em;
+    text-transform: uppercase;
+    font-size: 1.2em;
+    transition: all .5s;
+}
+
+.highlight:hover h2 {
+    top: -10px;
+    left: -20px;
+}
+
+.highlight img {
+    width: 100%;
+}
+
+/* galerie + aside */
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.gallery {
+    width: 70%;
+    /* l'espace entre les images, dû à l'indentation du HTML, nous gêne. Si on change la font-size, la largeur de l'espace change proportionnellement. Du coup, pour une font-size de 0, l'espace ne prendra aucun pixel de largeur */
+    font-size: 0;
+    padding-right: 35px;
+    box-sizing: border-box;
+}
+
+.image {
+    /* calc permet de calculer un résultat plutôt que de l'écrire "en dur". Ici, les 25% sont variables, ils dépendent de la largeur du parent, donc 25% - 5px ne donne pas un résultat fixe : on est obligés de laisser le navigateur calculer ce que donne 25% - 5px */
+    width: calc(25% - 5px);
+    margin-right: 5px;
+    margin-bottom: 5px;
+    filter: grayscale(70%);
+    transition: filter 2s;
+}
+
+/* les pseudo-sélecteurs *-child
+ - :first-child pour sélectionner le premier enfant de son parent
+ - :last-child pour sélectionner le dernier enfant de son parent
+ - :nth-child pour sélectionner le n-ième enfant de son parent, qu'il faut alors préciser entre parenthèses */
+.image:nth-child(15) {
+    border: 2px solid red;
+    box-sizing: border-box;
+}
+
+.image:hover {
+    filter: grayscale(0);
+}
+
+.image--big {
+    width: calc(50% - 5px);
+    float: left;
+} 
+
+aside {
+    width: 30%;
+    padding: 24px;
+    background-color: #004488;
+    /* le box-sizing permet de modifier la manière de calculer la largeur d'un élément : par défaut, le mode content-box fixe la valeur de width pour le contenu uniquement (s'il y a du padding ou une bordure, cela vient se rajouter à la largeur) */
+    /* le mode border-box permet d'attribuer la width à contenu+padding+border */
+    box-sizing: border-box;
+}
+
+/* footer */
+
+/* responsive */
+
+/* tablettes */
+@media (max-width: 1023px) {
+    body {
+        width: 720px;
+    }
+}
+
+/* mobiles */
+@media (max-width: 767px) {
+    body {
+        width: 95%;
+        font-size: 13px;
+    }
+    main {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: stretch;
+    }
+    aside {
+        padding: 5px;
+    }
+    .gallery, aside {
+        width: 100%;
+    }
+    .gallery {
+        padding: 0;
+    }
+    .image {
+        filter: none;
+    }
+    .image--big {
+        float: none;
+        width: calc(25% - 5px);
+    }
+}
